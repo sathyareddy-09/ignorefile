@@ -1,0 +1,2 @@
+# ignorefile
+test ignore files
