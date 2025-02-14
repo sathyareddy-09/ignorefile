@@ -1,0 +1,28 @@
+name: Merge from dev to main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout dev branch
+      uses: actions/checkout@v2
+      with:
+        ref: dev
+
+    - name: Merge dev into main
+      run: |
+        git config --global user.name 'sathya'
+        git config --global user.email 'sathyap1818@gmail.com'
+        git checkout main
+        git pull origin main
+        git merge --strategy-option theirs dev
+        git checkout --ours test.txt
+        git add test.json
+        git commit -m "Keep test.txt from main branch"
+        git push origin main
